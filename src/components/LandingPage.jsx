@@ -204,8 +204,8 @@ export default function LandingPage() {
           className="w-full p-3 rounded-lg bg-gray-800 text-white mt-1"
         />
         <p className="text-xs text-gray-400 mt-1">
-          Balance: {mode === "buy" ? balanceUSDT : mode === "buyWithEuro" ? balanceUSDT : balanceCHF}{" "}
-          {mode === "buy" ? "USDT" : mode === "buyWithEuro" ? "EURO" : "CHF"}
+          {mode === "buy" ? "Balance: " + balanceUSDT : mode === "buyWithEuro" ? "" : "Balance: " + balanceCHF}{" "}
+          {mode === "buy" ? "USDT" : mode === "buyWithEuro" ? "" : "CHF"}
         </p>
       </div>
 
