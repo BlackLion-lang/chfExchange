@@ -81,7 +81,7 @@ function PaymentForm({ amount, onSuccess, onError }: PaymentFormProps) {
           },
           body: JSON.stringify({
             paymentIntentId: paymentIntent.id,
-            userWallet : address
+            userWallet: address
           }),
         })
 
@@ -140,13 +140,18 @@ function PaymentForm({ amount, onSuccess, onError }: PaymentFormProps) {
           </div>
         </div>
         <p className="text-sm sm:text-base text-foreground/80 mb-4 sm:mb-6 max-w-2xl mx-auto text-pretty">
-          Trade CHF.CH with BNB USDT. Backed by Swiss precision, stability, and regulatory compliance.
+          Trade CHF.CH with €. Backed by Swiss precision, stability, and regulatory compliance.
+        </p>
+        <p className="text-sm sm:text-base text-foreground/80 mb-4 sm:mb-6 max-w-2xl mx-auto text-pretty">
+          Please exchange your euro to swiss precision stablecoin CHF.CH via credit card payment.
         </p>
         <div className="grid grid-cols-1 gap-2 sm:gap-3 max-w-sm sm:max-w-md mx-auto">
-          <div className="text-center bg-card/90 backdrop-blur-md border border-border p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-xl">
-            <div className="text-lg sm:text-2xl font-bold text-card-foreground">Total Volume</div>
-            {/* <p className="text-card-foreground/80 text-xs sm:text-sm">{balanceCHF} CHF</p> */}
-          </div>
+          {/* <div className="text-center bg-card/90 backdrop-blur-md border border-border p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-xl"> */}
+          {/* <div className="text-lg sm:text-2xl font-bold text-card-foreground">Total Volume</div> */}
+          {/* <p className="text-card-foreground/80 text-xs sm:text-sm">{balanceCHF} CHF</p> */}
+          {/* <div className="text-lg sm:text-2xl font-bold text-card-foreground">Total Volume</div>
+            <p className="text-card-foreground/80 text-xs sm:text-sm">{balanceCHF} CHF</p> */}
+          {/* </div> */}
           {/* <div className="text-center bg-card/90 backdrop-blur-md border border-border p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-xl">
             <div className="text-lg sm:text-2xl font-bold text-card-foreground">totalUsers</div>
             <p className="text-card-foreground/80 text-xs sm:text-sm">Active Users</p>

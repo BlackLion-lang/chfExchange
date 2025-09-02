@@ -155,7 +155,7 @@ export default function LandingPage() {
           </div>
         </div>
         <p className="text-sm sm:text-base text-foreground/80 mb-4 sm:mb-6 max-w-2xl mx-auto text-pretty">
-          Trade CHF.CH with BNB USDT. Backed by Swiss precision, stability, and regulatory compliance.
+          CHFx is a blockchain-based stablecoin pegged 1:1 to the Swiss Franc, giving you stability, transparency, and global accessibility.
         </p>
         <div className="grid grid-cols-1 gap-2 sm:gap-3 max-w-sm sm:max-w-md mx-auto">
           <div className="text-center bg-card/90 backdrop-blur-md border border-border p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-xl">
@@ -182,7 +182,7 @@ export default function LandingPage() {
           onClick={() => setMode("buyWithEuro")}
           className={`w-1/2 rounded-r-xl ${mode === "buyWithEuro" ? "bg-green-600" : "bg-gray-700"}`}
         >
-          Buy CHF with EURO
+          Buy CHF with Card
         </Button>
         <Button
           onClick={() => setMode("sell")}
@@ -211,7 +211,7 @@ export default function LandingPage() {
 
       <div>
         <label className="text-sm text-gray-300">To ({mode === "sell" ? "USDT" : "CHF"})</label>
-        <input type="text" disabled value={amount} className="w-full p-3 rounded-lg bg-gray-800 text-gray-400 mt-1" />
+        <input type="text" disabled  value={ mode === "buyWithEuro" ? (amount * 0.94).toFixed(2) : mode === "buy" ? (amount * 0.8).toFixed(2) : (amount / 0.8).toFixed(2)} className="w-full p-3 rounded-lg bg-gray-800 text-gray-400 mt-1" />
         <p className="text-xs text-gray-400 mt-1">
           Balance: {mode === "sell" ? balanceUSDT : balanceCHF} {mode === "sell" ? "USDT" : "CHF"}
         </p>
