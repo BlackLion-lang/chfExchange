@@ -1,7 +1,4 @@
 import React from 'react'
-import imgHowToOne from '../../public/how-to-1.svg'
-import imgHowToTwo from '../../public/how-to-2.svg'
-import imgHowToThree from '../../public/how-to-3.svg'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/free-mode'
