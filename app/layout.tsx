@@ -6,7 +6,11 @@ import "./globals.css"
 export const metadata: Metadata = {
   title: "CHF.CH Exchange",
   description: "Swiss Stablecoin Exchange Platform",
-  generator: "v0.app",
+  icons: {
+    icon: "/chf-logo.png",
+    shortcut: "/chf-logo.png",
+    apple: "/chf-logo.png",
+  },
 }
 
 export default function RootLayout({
