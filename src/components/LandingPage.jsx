@@ -143,7 +143,7 @@ export default function LandingPage() {
   }
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText("0x8330c33ef546d3738f1029c4cd994c62b4d8ef6a");
+    await navigator.clipboard.writeText("0x6975543aa89f11781be639c9af052a4ceddf03cc");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000); // hide after 2s
   };
@@ -185,7 +185,7 @@ export default function LandingPage() {
           </div>
         </div>
         <div className="border  border-black shadow-lg shadow-black text-xl sm:text-2xl text-foreground/80 mb-4 px-8 sm:mb-6 max-w-xl mx-auto text-pretty">
-          <span className="w-full">Contract Address : 0x83...ef6a </span>
+          <span className="w-full">Contract Address : 0x69...03cc </span>
           <button onClick={handleCopy}>
             <IoCopyOutline />
           </button>
