@@ -15,11 +15,12 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 interface PaymentFormProps {
   amount: string
   userWallet: string
-  onSuccess: (tokenAmount: string) => void
+  price: number
+  onSuccess: (tokenAmount: string, txHash: string ) => void
   onError: (error: string) => void
 }
 
-function PaymentForm({ amount, onSuccess, onError }: PaymentFormProps) {
+function PaymentForm({ amount, price, onSuccess, onError }: PaymentFormProps) {
   const { address, isConnected } = useAccount()
   const stripe = useStripe()
   const elements = useElements()
@@ -88,7 +89,7 @@ function PaymentForm({ amount, onSuccess, onError }: PaymentFormProps) {
         const result = await confirmResponse.json()
         if (result.success) {
           console.log("[v0] Payment confirmed successfully")
-          onSuccess(result.tokenAmount)
+          onSuccess(result.tokenAmount, result.txHash)
         } else {
           onError(result.message || "Payment confirmation failed")
         }
@@ -182,7 +183,7 @@ function PaymentForm({ amount, onSuccess, onError }: PaymentFormProps) {
 
         <div className="flex items-center justify-between text-sm">
           <span className="text-foreground/70">You receive:</span>
-          <span className="font-semibold">{amount} CHF</span>
+          <span className="font-semibold">{(Number(amount) * price).toFixed(2)} CHF</span>
         </div>
       </div>
 
@@ -209,11 +210,12 @@ function PaymentForm({ amount, onSuccess, onError }: PaymentFormProps) {
 
 interface CreditCardPaymentProps {
   amount: string
-  onSuccess: (tokenAmount: string) => void
+  price: number
+  onSuccess: (tokenAmount: string, txHash: string) => void
   onError: (error: string) => void
 }
 
-export default function CreditCardPayment({ amount, onSuccess, onError }: CreditCardPaymentProps) {
+export default function CreditCardPayment({ amount, price, onSuccess, onError }: CreditCardPaymentProps) {
   return (
     <Card className="glass-card">
       <CardHeader>
@@ -224,7 +226,7 @@ export default function CreditCardPayment({ amount, onSuccess, onError }: Credit
       </CardHeader>
       <CardContent>
         <Elements stripe={stripePromise}>
-          <PaymentForm amount={amount} onSuccess={onSuccess} onError={onError} userWallet={""} />
+          <PaymentForm amount={amount} price={price} onSuccess={onSuccess} onError={onError} userWallet={""} />
         </Elements>
       </CardContent>
     </Card>

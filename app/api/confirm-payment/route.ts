@@ -32,13 +32,12 @@ export async function POST(request: NextRequest) {
 
       const tokenAmount = paymentIntent.metadata.token_amount
 
-      console.log(`[v0] Payment successful: ${paymentIntentId}, Amount: ${tokenAmount} CHF`)
-
       // --- Send CHF tokens on-chain ---
       try {
         const tx = await vaultContract.send(userWallet, ethers.parseUnits(tokenAmount, 18))
         await tx.wait()
         console.log(`✅ Sent ${tokenAmount} CHF to ${userWallet}, tx: ${tx.hash}`)
+        console.log(`[v0] Payment successful: ${paymentIntentId}, Amount: ${tokenAmount} CHF`)
 
         return NextResponse.json({
           success: true,

@@ -4,19 +4,24 @@ import { useState, useEffect } from "react"
 import { useAccount, useReadContract, useWriteContract } from "wagmi"
 import { CONTRACTS, ABIS } from "../constant/constant"
 import { Button } from "./ui/button"
+import { IoCopyOutline } from 'react-icons/io5'
 import { formatUnits, parseUnits } from "viem"
 import CreditCardPayment from "../../components/CreditCardPayment"
 import PaymentSuccess from "../../components/PaymentSuccess"
 
 export default function LandingPage() {
+  const [copied, setCopied] = useState(false);
   const { address, isConnected } = useAccount()
   const [amount, setAmount] = useState("")
   const [mode, setMode] = useState("buy") // "buy" or "sell"
   const [balanceUSDT, setBalanceUSDT] = useState("0")
   const [balanceCHF, setBalanceCHF] = useState("0")
+  const [chfPrice, setCHFPrice] = useState("0")
+  const [EurPrice, setEURPrice] = useState("0")
   const [showPayment, setShowPayment] = useState(false)
   const [paymentSuccess, setPaymentSuccess] = useState(false)
   const [purchasedTokens, setPurchasedTokens] = useState("")
+  const [txHash, setTxHash] = useState("")
   const [paymentError, setPaymentError] = useState("")
   const slippagePercent = 1 // 1% slippage
 
@@ -39,10 +44,26 @@ export default function LandingPage() {
     query: { enabled: !!address },
   })
 
+  const { data: chfToUsd } = useReadContract({
+    address: CONTRACTS.chfBuyContract_ADDRESS,
+    abi: ABIS.chfBuyContract,
+    functionName: "getCHFUSDPrice",
+    watch: true,
+  })
+
+  const { data: EurToUsd } = useReadContract({
+    address: CONTRACTS.chfBuyContract_ADDRESS,
+    abi: ABIS.chfBuyContract,
+    functionName: "getEURUSDPrice",
+    watch: true,
+  })
+
   useEffect(() => {
     if (usdtBalance) setBalanceUSDT(formatUnits(usdtBalance, 18))
     if (chfBalance) setBalanceCHF(formatUnits(chfBalance, 18))
-  }, [usdtBalance, chfBalance])
+    if (chfToUsd) setCHFPrice(formatUnits(chfToUsd, 8))
+    if (EurToUsd) setEURPrice(formatUnits(EurToUsd, 8))
+  }, [usdtBalance, chfBalance, chfToUsd, EurToUsd])
 
   // --- Write contract ---
   const { writeContract: write } = useWriteContract()
@@ -53,6 +74,8 @@ export default function LandingPage() {
     const minOut = num * (1 - slippagePercent / 100)
     return minOut.toString()
   }
+
+  const EurToChf = EurPrice / chfPrice
 
   // --- Approve & Buy ---
   const handleApproveBuy = async () => {
@@ -100,8 +123,9 @@ export default function LandingPage() {
     setShowPayment(true)
   }
 
-  const handlePaymentSuccess = (tokenAmount) => {
+  const handlePaymentSuccess = (tokenAmount, txHash) => {
     setPurchasedTokens(tokenAmount)
+    setTxHash(txHash)
     setPaymentSuccess(true)
     setShowPayment(false)
   }
@@ -118,10 +142,16 @@ export default function LandingPage() {
     setPaymentError("")
   }
 
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText("0x8330c33ef546d3738f1029c4cd994c62b4d8ef6a");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000); // hide after 2s
+  };
+
   if (paymentSuccess) {
     return (
       <div className="max-w-screen-lg mx-auto bg-black/40 rounded-2xl shadow-lg p-6">
-        <PaymentSuccess tokenAmount={purchasedTokens} onContinue={handleContinueTrading} />
+        <PaymentSuccess tokenAmount={purchasedTokens} price={EurToChf} txHash={txHash} onContinue={handleContinueTrading} />
       </div>
     )
   }
@@ -135,7 +165,7 @@ export default function LandingPage() {
             Back to Exchange
           </Button>
         </div>
-        <CreditCardPayment amount={amount} onSuccess={handlePaymentSuccess} onError={handlePaymentError} />
+        <CreditCardPayment amount={amount} price={EurToChf} onSuccess={handlePaymentSuccess} onError={handlePaymentError} />
       </div>
     )
   }
@@ -154,18 +184,29 @@ export default function LandingPage() {
             <p className="text-sm sm:text-lg text-foreground/90">Swiss Franc Stablecoin Trading Platform</p>
           </div>
         </div>
+        <div className="border  border-black shadow-lg shadow-black text-xl sm:text-2xl text-foreground/80 mb-4 px-8 sm:mb-6 max-w-xl mx-auto text-pretty">
+          <span className="w-full">Contract Address : 0x83...ef6a </span>
+          <button onClick={handleCopy}>
+            <IoCopyOutline />
+          </button>
+          {copied && <span className="text-sm text-green-600">Copied!</span>}
+        </div>
         <p className="text-sm sm:text-base text-foreground/80 mb-4 sm:mb-6 max-w-2xl mx-auto text-pretty">
           CHFx is a blockchain-based stablecoin pegged 1:1 to the Swiss Franc, giving you stability, transparency, and global accessibility.
         </p>
-        <div className="grid grid-cols-1 gap-2 sm:gap-3 max-w-sm sm:max-w-md mx-auto">
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 max-w-sm sm:max-w-md mx-auto">
           <div className="text-center bg-card/90 backdrop-blur-md border border-border p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-xl">
-            <div className="text-lg sm:text-2xl font-bold text-card-foreground">Total Volume</div>
-            <p className="text-card-foreground/80 text-xs sm:text-sm">{balanceCHF} CHF</p>
+            <div className="text-lg sm:text-2xl font-bold text-card-foreground">CHF Balance</div>
+            <p className="text-card-foreground/80 text-xs sm:text-sm">{Number(balanceCHF).toFixed(2)} CHF</p>
           </div>
-          {/* <div className="text-center bg-card/90 backdrop-blur-md border border-border p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-xl">
-            <div className="text-lg sm:text-2xl font-bold text-card-foreground">totalUsers</div>
-            <p className="text-card-foreground/80 text-xs sm:text-sm">Active Users</p>
-          </div> */}
+          <div className="text-center bg-card/90 backdrop-blur-md border border-border p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-xl">
+            <div className="text-lg sm:text-2xl font-bold text-card-foreground">CHF/USD 1 CHF</div>
+            <p className="text-card-foreground/80 text-xs sm:text-sm"> {(chfPrice / 1e10).toFixed(2)} USD</p>
+          </div>
+          <div className="text-center bg-card/90 backdrop-blur-md border border-border p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-xl">
+            <div className="text-lg sm:text-2xl font-bold text-card-foreground">EUR/CHF 1 EUR</div>
+            <p className="text-card-foreground/80 text-xs sm:text-sm">{(EurToChf).toFixed(2)} CHF</p>
+          </div>
         </div>
       </div>
 
@@ -178,12 +219,12 @@ export default function LandingPage() {
         >
           Buy CHF with USDT
         </Button>
-        <Button
+        {/* <Button
           onClick={() => setMode("buyWithEuro")}
           className={`w-1/2 rounded-r-xl ${mode === "buyWithEuro" ? "bg-green-600" : "bg-gray-700"}`}
         >
           Buy CHF with Card
-        </Button>
+        </Button> */}
         <Button
           onClick={() => setMode("sell")}
           className={`w-1/2 rounded-r-xl ${mode === "sell" ? "bg-red-600" : "bg-gray-700"}`}
@@ -204,16 +245,16 @@ export default function LandingPage() {
           className="w-full p-3 rounded-lg bg-gray-800 text-white mt-1"
         />
         <p className="text-xs text-gray-400 mt-1">
-          {mode === "buy" ? "Balance: " + balanceUSDT : mode === "buyWithEuro" ? "" : "Balance: " + balanceCHF}{" "}
+          {mode === "buy" ? "Balance: " + balanceUSDT : mode === "buyWithEuro" ? "" : "Balance: " + Number(balanceCHF).toFixed(2)}{" "}
           {mode === "buy" ? "USDT" : mode === "buyWithEuro" ? "" : "CHF"}
         </p>
       </div>
 
       <div>
         <label className="text-sm text-gray-300">To ({mode === "sell" ? "USDT" : "CHF"})</label>
-        <input type="text" disabled  value={ mode === "buyWithEuro" ? (amount * 0.94).toFixed(2) : mode === "buy" ? (amount * 0.8).toFixed(2) : (amount / 0.8).toFixed(2)} className="w-full p-3 rounded-lg bg-gray-800 text-gray-400 mt-1" />
+        <input type="text" disabled value={mode === "buyWithEuro" ? (amount * (EurPrice / chfPrice)).toFixed(2) : mode === "buy" ? (amount / (chfPrice / 1e10)).toFixed(2) : (amount * chfPrice / 1e10).toFixed(2)} className="w-full p-3 rounded-lg bg-gray-800 text-gray-400 mt-1" />
         <p className="text-xs text-gray-400 mt-1">
-          Balance: {mode === "sell" ? balanceUSDT : balanceCHF} {mode === "sell" ? "USDT" : "CHF"}
+          Balance: {mode === "sell" ? balanceUSDT : Number(balanceCHF).toFixed(2)} {mode === "sell" ? "USDT" : "CHF"}
         </p>
       </div>
 

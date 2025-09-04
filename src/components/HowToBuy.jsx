@@ -14,17 +14,17 @@ const howToBuyData = [
     description:
       'Convert your USDT directly into CHF.CH at real-time rates. Simply connect your wallet, choose the amount of USDT you want to spend, and receive CHF.CH instantly into your account. Fast, secure, and on-chain'
   },
+  // {
+  //   id: '02',
+  //   // image: imgHowToTwo,
+  //   title: 'Buy with CARD',
+  //   href: '',
+  //   bg: '#D3D5FF',
+  //   description:
+  //     'Purchase CHF.CH using your debit or credit card. Enter the amount in €, complete the secure payment, and CHF.CH will be credited to your wallet within minutes. Perfect for users without crypto.'
+  // },
   {
     id: '02',
-    // image: imgHowToTwo,
-    title: 'Buy with CARD',
-    href: '',
-    bg: '#D3D5FF',
-    description:
-      'Purchase CHF.CH using your debit or credit card. Enter the amount in €, complete the secure payment, and CHF.CH will be credited to your wallet within minutes. Perfect for users without crypto.'
-  },
-  {
-    id: '03',
     // image: imgHowToThree,
     title: 'Sell CHF.CH',
     href: '',
@@ -51,7 +51,7 @@ const HowToBuy = () => {
           alt="tree"
           className="absolute top-[140px] right-0 w-[200px] md:w-auto"
         /> */}
-        <div className="grid grid-cols-1 md:grid-cols-3 max-w-[1300px] w-full mx-auto gap-20 md:gap-8 py-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 max-w-[1300px] w-full mx-auto gap-20 md:gap-8 py-6">
           {howToBuyData.map(item => (
             <div
               key={item.id}

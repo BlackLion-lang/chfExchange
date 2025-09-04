@@ -3,13 +3,18 @@
 import { CheckCircle, ArrowRight } from "lucide-react"
 import { Button } from "./ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
+import { useEffect, useState } from "react"
 
 interface PaymentSuccessProps {
   tokenAmount: string
+  price: number
+  txHash: string
   onContinue: () => void
 }
 
-export default function PaymentSuccess({ tokenAmount, onContinue }: PaymentSuccessProps) {
+export default function PaymentSuccess({ tokenAmount, price, txHash, onContinue }: PaymentSuccessProps) {
+
+  const txUrl = `https://bscscan.com/tx/${txHash}`;
   return (
     <Card className="glass-card">
       <div className="text-center mb-3 sm:mb-4 hero-gradient rounded-2xl sm:rounded-3xl p-3 sm:p-4 glass-card">
@@ -43,10 +48,21 @@ export default function PaymentSuccess({ tokenAmount, onContinue }: PaymentSucce
       <CardContent className="text-center space-y-4">
         <p className="text-foreground/80">Your payment has been processed successfully.</p>
         <div className="bg-card/50 p-4 rounded-lg">
-          <p className="text-sm text-foreground/70 mb-1">CHF Tokens Purchased:</p>
-          <p className="text-2xl font-bold text-green-400">{tokenAmount} CHF</p>
+          <p className="text-sm text-foreground/70 mb-1">CHF.CH Purchased:</p>
+          <p className="text-2xl font-bold text-green-400">{(Number(tokenAmount) * price).toFixed(2)} CHF</p>
         </div>
-        <p className="text-sm text-foreground/60">Your CHF tokens will be sent to your connected wallet shortly.</p>
+        <p className="text-sm text-foreground/60">Your CHF.CH sent to your connected wallet. Please check.</p>
+         {/* Dynamic Transaction Link */}
+        {txUrl  && (
+          <a
+            href={txUrl }
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline"
+          >
+            View on block explorer : {txUrl.replace("https://bscscan.com/tx/", "").slice(0, 6)}...{txUrl.slice(-4)}
+          </a>
+        )}
         <Button onClick={onContinue} className="w-full">
           Continue Trading
           <ArrowRight className="w-4 h-4 ml-2" />

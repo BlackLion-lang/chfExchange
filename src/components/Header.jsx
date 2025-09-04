@@ -30,9 +30,9 @@ export default function Header() {
         {/* Desktop Buttons */}
         <div className="hidden md:flex items-center space-x-3">
           <w3m-button balance="show" size="sm" />
-          <Button variant="ghost" size="sm" className="hover:bg-white/10">
+          {/* <Button variant="ghost" size="sm" className="hover:bg-white/10">
             <Settings className="w-4 h-4" />
-          </Button>
+          </Button> */}
         </div>
 
         {/* Mobile Menu Toggle */}
