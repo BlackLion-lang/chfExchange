@@ -22,7 +22,7 @@ export default function Header() {
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-6">
           <a href="#" className="hover:text-red-400 transition-colors">Exchange</a>
-          <a href="https://coinmarketcap.com/" className="hover:text-red-400 transition-colors">Markets</a>
+          <a href="https://coinmarketcap.com/" target="_blank" rel="noreferrer" className="hover:text-red-400 transition-colors">Markets</a>
           {/* <a href="#" className="hover:text-red-400 transition-colors">Wallet</a>
           <a href="#" className="hover:text-red-400 transition-colors">Support</a> */}
         </nav>
