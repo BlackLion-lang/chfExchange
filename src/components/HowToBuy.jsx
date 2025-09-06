@@ -12,7 +12,7 @@ const howToBuyData = [
     href: '',
     bg: '#D1F4FF',
     description:
-      'Convert your USDT directly into CHF.CH at real-time rates. Simply connect your wallet, choose the amount of USDT you want to spend, and receive CHF.CH instantly into your account. Fast, secure, and on-chain'
+      'Convert your USDT directly into CHF at real-time rates. Simply connect your wallet, choose the amount of USDT you want to spend, and receive CHF instantly into your account. Fast, secure, and on-chain'
   },
   // {
   //   id: '02',
@@ -21,16 +21,16 @@ const howToBuyData = [
   //   href: '',
   //   bg: '#D3D5FF',
   //   description:
-  //     'Purchase CHF.CH using your debit or credit card. Enter the amount in €, complete the secure payment, and CHF.CH will be credited to your wallet within minutes. Perfect for users without crypto.'
+  //     'Purchase CHF using your debit or credit card. Enter the amount in €, complete the secure payment, and CHF will be credited to your wallet within minutes. Perfect for users without crypto.'
   // },
   {
     id: '02',
     // image: imgHowToThree,
-    title: 'Sell CHF.CH',
+    title: 'Sell CHF',
     href: '',
     bg: '#FFFDCF',
     description:
-      'Want to sell CHF.CH? Exchange your CHF.CH back into USDT. Just select how much CHF.CH you want to sell, confirm the transaction, and receive your funds instantly.'
+      'Want to sell CHF? Exchange your CHF back into USDT. Just select how much CHF you want to sell, confirm the transaction, and receive your funds instantly.'
   }
 ]
 

@@ -135,16 +135,16 @@ function PaymentForm({ amount, price, onSuccess, onError }: PaymentFormProps) {
           </div>
           <div>
             <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-foreground mb-1 sm:mb-2 text-balance">
-              CHF.CH Exchange
+              CHF Exchange
             </h1>
             <p className="text-sm sm:text-lg text-foreground/90">Swiss Franc Stablecoin Trading Platform</p>
           </div>
         </div>
         <p className="text-sm sm:text-base text-foreground/80 mb-4 sm:mb-6 max-w-2xl mx-auto text-pretty">
-          Trade CHF.CH with €. Backed by Swiss precision, stability, and regulatory compliance.
+          Trade CHF with €. Backed by Swiss precision, stability, and regulatory compliance.
         </p>
         <p className="text-sm sm:text-base text-foreground/80 mb-4 sm:mb-6 max-w-2xl mx-auto text-pretty">
-          Please exchange your euro to swiss precision stablecoin CHF.CH via credit card payment.
+          Please exchange your euro to swiss precision stablecoin CHF via credit card payment.
         </p>
         <div className="grid grid-cols-1 gap-2 sm:gap-3 max-w-sm sm:max-w-md mx-auto">
           {/* <div className="text-center bg-card/90 backdrop-blur-md border border-border p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-xl"> */}

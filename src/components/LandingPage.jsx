@@ -179,7 +179,7 @@ export default function LandingPage() {
           </div>
           <div>
             <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-foreground mb-1 sm:mb-2 text-balance">
-              CHF.CH Exchange
+              CHF Exchange
             </h1>
             <p className="text-sm sm:text-lg text-foreground/90">Swiss Franc Stablecoin Trading Platform</p>
           </div>

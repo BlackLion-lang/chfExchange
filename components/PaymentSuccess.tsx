@@ -24,13 +24,13 @@ export default function PaymentSuccess({ tokenAmount, price, txHash, onContinue 
           </div>
           <div>
             <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-foreground mb-1 sm:mb-2 text-balance">
-              CHF.CH Exchange
+              CHF Exchange
             </h1>
             <p className="text-sm sm:text-lg text-foreground/90">Swiss Franc Stablecoin Trading Platform</p>
           </div>
         </div>
         <p className="text-sm sm:text-base text-foreground/80 mb-4 sm:mb-6 max-w-2xl mx-auto text-pretty">
-          Trade CHF.CH with BNB USDT. Backed by Swiss precision, stability, and regulatory compliance.
+          Trade CHF with BNB USDT. Backed by Swiss precision, stability, and regulatory compliance.
         </p>
         <div className="grid grid-cols-1 gap-2 sm:gap-3 max-w-sm sm:max-w-md mx-auto">
           {/* <div className="text-center bg-card/90 backdrop-blur-md border border-border p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-xl">
@@ -48,10 +48,10 @@ export default function PaymentSuccess({ tokenAmount, price, txHash, onContinue 
       <CardContent className="text-center space-y-4">
         <p className="text-foreground/80">Your payment has been processed successfully.</p>
         <div className="bg-card/50 p-4 rounded-lg">
-          <p className="text-sm text-foreground/70 mb-1">CHF.CH Purchased:</p>
+          <p className="text-sm text-foreground/70 mb-1">CHF Purchased:</p>
           <p className="text-2xl font-bold text-green-400">{(Number(tokenAmount) * price).toFixed(2)} CHF</p>
         </div>
-        <p className="text-sm text-foreground/60">Your CHF.CH sent to your connected wallet. Please check.</p>
+        <p className="text-sm text-foreground/60">Your CHF sent to your connected wallet. Please check.</p>
          {/* Dynamic Transaction Link */}
         {txUrl  && (
           <a
@@ -60,7 +60,7 @@ export default function PaymentSuccess({ tokenAmount, price, txHash, onContinue 
             rel="noopener noreferrer"
             className="text-blue-500 underline"
           >
-            View on block explorer : {txUrl.replace("https://bscscan.com/tx/", "").slice(0, 6)}...{txUrl.slice(-4)}
+            View on block explorer : https://bscscan.com/tx/{txUrl.replace("https://bscscan.com/tx/", "").slice(0, 6)}...{txUrl.slice(-4)}
           </a>
         )}
         <Button onClick={onContinue} className="w-full">

@@ -4,7 +4,7 @@ import "../src/index.css"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "CHF.CH Exchange",
+  title: "CHF Exchange",
   description: "Swiss Stablecoin Exchange Platform",
   icons: {
     icon: "/chf-logo.png",

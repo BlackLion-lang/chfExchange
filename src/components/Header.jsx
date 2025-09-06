@@ -16,7 +16,7 @@ export default function Header() {
           <div className="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center">
             <img src="/chf-logo.png" alt="CHF.CH Logo" className="w-8 h-8 rounded-full" />
           </div>
-          <div className="font-bold text-xl">CHF.CH Exchange</div>
+          <div className="font-bold text-xl">CHF Exchange</div>
         </div>
 
         {/* Desktop Nav */}

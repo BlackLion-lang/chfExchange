@@ -8,8 +8,8 @@ const Faqs = () => {
 
   const faqs = [
     {
-      question: 'What is CHF.CH?',
-      answer: 'CHF.CH is a digital stablecoin designed to mirror the value of the Swiss Franc (CHF) on the blockchain. For every CHF.CH issued, there is an equivalent CHF held in secure reserves, ensuring price stability and trust.'
+      question: 'What is CHF?',
+      answer: 'CHF is a digital stablecoin designed to mirror the value of the Swiss Franc (CHF) on the blockchain. For every CHF issued, there is an equivalent CHF held in secure reserves, ensuring price stability and trust.'
     },
     {
       question: 'Why Swiss Franc?',
@@ -17,8 +17,8 @@ const Faqs = () => {
         'The Swiss Franc is known globally as a safe-haven currency, trusted for decades due to Switzerland’s financial stability and independence. By tokenizing CHF, we bring that same reliability to digital assets.'
     },
     {
-      question: 'How does CHF.CH stay pegged to CHF?',
-      answer: 'Each CHF.CH token is backed 1:1 by Swiss Franc reserves held with regulated partners.'
+      question: 'How does CHF stay pegged to CHF?',
+      answer: 'Each CHF token is backed 1:1 by Swiss Franc reserves held with regulated partners.'
     },
     // {
     //   question: 'Can I redeem CHF.CH for Swiss Francs?',
