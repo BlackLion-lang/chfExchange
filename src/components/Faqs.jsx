@@ -27,6 +27,10 @@ const Faqs = () => {
     {
       question: 'How safe is my money?',
       answer: 'Reserves are regularly audited, smart contracts are independently verified, and our system is built with security first.'
+    },
+    {
+      question: 'Is it safe for institutional holdings?',
+      answer: 'Absolutely. Funds are fully collateralized, compliant with Swiss regulation, and secured through audited smart contracts.'
     }
   ]
 
@@ -37,7 +41,7 @@ const Faqs = () => {
   return (
     <div >
       <div className=" text-xl font-bold mb-4">
-        <h3 className="faqs-title">Frequently asked questions</h3>
+        <h3 className="text-4xl md:text-5xl font-bold text-center mb-16 uppercase text-white">Frequently asked questions</h3>
         <div className="faq-items">
           {faqs.map((faq, index) => (
             <div key={index} className="faq-item">

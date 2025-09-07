@@ -8,6 +8,46 @@
   }
 }
 
+/* Gradient animation (original colors) */
+@keyframes gradient-x {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient-slow {
+  animation: gradient-x 15s ease infinite;
+}
+
+/* Particle styles */
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.25); /* subtle white */
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Particle animation */
+@keyframes particle-move {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+  30% { transform: translate(calc(-50% + 200px), calc(-50% + 150px)) scale(1.5); opacity: 0.6; }
+  70% { transform: translate(calc(-50% + 200px), calc(-50% + 150px)) scale(1.5); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+}
+
+.animate-particle {
+  animation: particle-move 12s linear infinite;
+}
+
+.animate-particle.delay-2000 { animation-delay: 2s; }
+.animate-particle.delay-4000 { animation-delay: 4s; }
+.animate-particle.delay-6000 { animation-delay: 6s; }
+
+
+
 @layer base {
   :root {
     /* Updated color tokens for modern black-blue theme with high contrast text */

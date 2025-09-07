@@ -23,8 +23,15 @@ export default function Header() {
         <nav className="hidden md:flex items-center space-x-6">
           <a href="#" className="hover:text-red-400 transition-colors">Exchange</a>
           <a href="https://coinmarketcap.com/" target="_blank" rel="noreferrer" className="hover:text-red-400 transition-colors">Markets</a>
-          {/* <a href="#" className="hover:text-red-400 transition-colors">Wallet</a>
-          <a href="#" className="hover:text-red-400 transition-colors">Support</a> */}
+          <a
+            href="/CHF_Stablecoin_Whitepaper.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-red-400 transition-colors"
+          >
+            WhitePaper
+            </a>
+          {/* <a href="#" className="hover:text-red-400 transition-colors">Support</a> */}
         </nav>
 
         {/* Desktop Buttons */}
@@ -52,8 +59,15 @@ export default function Header() {
           <nav className="flex flex-col space-y-4 p-4">
             <a href="#" className="hover:text-red-400 transition-colors">Exchange</a>
             <a href="https://coinmarketcap.com/" className="hover:text-red-400 transition-colors">Markets</a>
-            {/* <a href="#" className="hover:text-red-400 transition-colors">Wallet</a>
-            <a href="#" className="hover:text-red-400 transition-colors">Support</a> */}
+            <a
+            href="/CHF_Stablecoin_Whitepaper.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-red-400 transition-colors"
+          >
+            WhitePaper
+            </a>
+            {/* <a href="#" className="hover:text-red-400 transition-colors">Support</a> */}
             <div className="mt-4">
               <w3m-button balance="show" size="sm" />
             </div>

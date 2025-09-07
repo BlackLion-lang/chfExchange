@@ -109,6 +109,8 @@ export default function LandingPage() {
   }
 
   const handleSell = async () => {
+    //can sell check
+    await read
     await write({
       address: CONTRACTS.chfBuyContract_ADDRESS,
       abi: ABIS.chfBuyContract,
@@ -172,7 +174,7 @@ export default function LandingPage() {
 
   return (
     <div className="max-w-screen-lg mx-auto bg-black/40 rounded-2xl shadow-lg p-6 space-y-6">
-      <div className="text-center mb-3 sm:mb-4 hero-gradient rounded-2xl sm:rounded-3xl p-3 sm:p-4 glass-card">
+      <div className="text-center mb-3 sm:mb-4 hero-gradient rounded-2xl sm:rounded-3xl p-3 sm:p-4 ">
         <div className="flex flex-col sm:flex-row justify-center items-center mb-3 sm:mb-4">
           <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary rounded-full flex items-center justify-center mb-3 sm:mb-0 sm:mr-4 shadow-2xl shadow-primary/25">
             <img src="/chf-logo.png" alt="CHF.CH Logo" className="w-8 h-8 sm:w-12 sm:h-12 rounded-full" />

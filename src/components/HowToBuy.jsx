@@ -36,13 +36,13 @@ const howToBuyData = [
 
 const HowToBuy = () => {
   return (
-    <div className="w-full pt-12 pb-5 relative">
+    <div className="w-full pb-5 relative">
       <div className="mt-[-80px]">
         {' '}
       </div>
       <div className="px-4">
         <div className="pt-32 pb-3 md:pb-3">
-          <h2 className="uppercase text-[30px] md:text-[40px] font-sourGummy font-weight: 600 line-height: 110px text-center pb-10">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 uppercase text-white">
             How to Exchange
           </h2>
         </div>
