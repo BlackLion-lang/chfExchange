@@ -210,23 +210,24 @@ export default function LandingPage() {
           <button onClick={handleCopy}><IoCopyOutline /></button>
           {copied && <span className="text-sm text-green-600">Copied!</span>}
         </div>
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 max-w-sm sm:max-w-md mx-auto mb-6">
+          <div className="text-center bg-card/90 border p-2 rounded-xl shadow-xl">
+            <div className="text-lg font-bold">CHF Balance</div>
+            <p className="text-sm">{Number(balanceCHF).toFixed(2)} CHF</p>
+          </div>
+          <div className="text-center bg-card/90 border p-2 rounded-xl shadow-xl">
+            <div className="text-lg font-bold">CHF/USD 1 CHF</div>
+            <p className="text-sm">{(chfPrice / 1e10).toFixed(2)} USD</p>
+          </div>
+          <div className="text-center bg-card/90 border p-2 rounded-xl shadow-xl">
+            <div className="text-lg font-bold">EUR/CHF 1 EUR</div>
+            <p className="text-sm">{(EurToChf).toFixed(2)} CHF</p>
+          </div>
+        </div>
       </div>
 
       {/* Balances */}
-      <div className="grid grid-cols-3 gap-2 sm:gap-3 max-w-sm sm:max-w-md mx-auto mb-6">
-        <div className="text-center bg-card/90 border p-2 rounded-xl shadow-xl">
-          <div className="text-lg font-bold">CHF Balance</div>
-          <p className="text-sm">{Number(balanceCHF).toFixed(2)} CHF</p>
-        </div>
-        <div className="text-center bg-card/90 border p-2 rounded-xl shadow-xl">
-          <div className="text-lg font-bold">CHF/USD 1 CHF</div>
-          <p className="text-sm">{(chfPrice / 1e10).toFixed(2)} USD</p>
-        </div>
-        <div className="text-center bg-card/90 border p-2 rounded-xl shadow-xl">
-          <div className="text-lg font-bold">EUR/CHF 1 EUR</div>
-          <p className="text-sm">{(EurToChf).toFixed(2)} CHF</p>
-        </div>
-      </div>
+
 
       {/* Tabs */}
       <h2 className="text-xl font-bold mb-4">Instant Exchange</h2>
