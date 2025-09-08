@@ -3,10 +3,12 @@
 import { useState } from "react"
 import { Menu, X, Settings } from "lucide-react"
 import { Button } from "./ui/button"
+import { useAccount } from "wagmi"
 import "@web3modal/wagmi/react" // registers <w3m-button />
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { address, isConnected } = useAccount()
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-700 bg-black/40 backdrop-blur-lg">
@@ -21,7 +23,7 @@ export default function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-6">
-          <a href="#" className="hover:text-red-400 transition-colors">Exchange</a>
+          <a href="/Exchange" className="hover:text-red-400 transition-colors">Exchange</a>
           <a href="https://coinmarketcap.com/" target="_blank" rel="noreferrer" className="hover:text-red-400 transition-colors">Markets</a>
           <a
             href="/CHF_Stablecoin_Whitepaper.pdf"
@@ -30,8 +32,10 @@ export default function Header() {
             className="hover:text-red-400 transition-colors"
           >
             WhitePaper
-            </a>
-          {/* <a href="#" className="hover:text-red-400 transition-colors">Support</a> */}
+          </a>
+          {address == "0x9c7e9a9EdEbF3C9F650c0ABc2dDFBA34769996C0" && (
+            <a href="/AdminPanel" className="hover:text-red-400 transition-colors">Admin Panel</a>
+          )}
         </nav>
 
         {/* Desktop Buttons */}
@@ -57,17 +61,19 @@ export default function Header() {
       {isMenuOpen && (
         <div className="md:hidden border-t border-gray-700 bg-black/60 backdrop-blur-lg">
           <nav className="flex flex-col space-y-4 p-4">
-            <a href="#" className="hover:text-red-400 transition-colors">Exchange</a>
+            <a href="/Exchange" className="hover:text-red-400 transition-colors">Exchange</a>
             <a href="https://coinmarketcap.com/" className="hover:text-red-400 transition-colors">Markets</a>
             <a
-            href="/CHF_Stablecoin_Whitepaper.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-red-400 transition-colors"
-          >
-            WhitePaper
+              href="/CHF_Stablecoin_Whitepaper.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-red-400 transition-colors"
+            >
+              WhitePaper
             </a>
-            {/* <a href="#" className="hover:text-red-400 transition-colors">Support</a> */}
+           {address == "0x9c7e9a9EdEbF3C9F650c0ABc2dDFBA34769996C0" && (
+            <a href="/AdminPanel" className="hover:text-red-400 transition-colors">Admin Panel</a>
+          )}
             <div className="mt-4">
               <w3m-button balance="show" size="sm" />
             </div>

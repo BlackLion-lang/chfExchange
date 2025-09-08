@@ -41,7 +41,7 @@ const About = () => {
 
     const roadmap = [
         { phase: 'Phase 1', timeline: 'Q1 2025', milestones: ['Concept design', 'Regulatory approval', 'Smart contract development'] },
-        { phase: 'Phase 2', timeline: 'Q2 2025', milestones: ['Launch on Ethereum & Solana'] },
+        { phase: 'Phase 2', timeline: 'Q2 2025', milestones: ['Launch on Binance'] },
         { phase: 'Phase 3', timeline: 'Q3 2025', milestones: ['Mobile wallet integration', 'Exchange listings', 'Merchant partnerships'] },
         { phase: 'Phase 4', timeline: 'Q4 2025', milestones: ['Cross-chain expansion', 'DeFi integration', 'Audit publication'] },
         { phase: 'Phase 5', timeline: '2026+', milestones: ['CBDC interoperability', 'Global adoption initiatives'] },
