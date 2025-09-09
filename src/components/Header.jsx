@@ -33,7 +33,7 @@ export default function Header() {
           >
             WhitePaper
           </a>
-          {address == "0x9c7e9a9EdEbF3C9F650c0ABc2dDFBA34769996C0" && (
+          {address == "0x69060fa0C81A9aEa4925b9da47b1C59f743F8b17" && (
             <a href="/AdminPanel" className="hover:text-red-400 transition-colors">Admin Panel</a>
           )}
         </nav>
@@ -71,7 +71,7 @@ export default function Header() {
             >
               WhitePaper
             </a>
-           {address == "0x9c7e9a9EdEbF3C9F650c0ABc2dDFBA34769996C0" && (
+           {address == "0x69060fa0C81A9aEa4925b9da47b1C59f743F8b17" && (
             <a href="/AdminPanel" className="hover:text-red-400 transition-colors">Admin Panel</a>
           )}
             <div className="mt-4">

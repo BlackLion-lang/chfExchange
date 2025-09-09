@@ -10,7 +10,7 @@ const nextConfig = {
     unoptimized: true,
   },
   
-  output: 'export', // ✅ replaces `next export`
+  // output: 'export', // ✅ replaces `next export`
 }
 
 

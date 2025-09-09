@@ -23,6 +23,9 @@ export default function LandingPage() {
   const [purchasedTokens, setPurchasedTokens] = useState("")
   const [txHash, setTxHash] = useState("")
   const [paymentError, setPaymentError] = useState("")
+  const [uploading, setUploading] = useState(false)
+  const [uploadError, setUploadError] = useState("")
+  const [uploadedFileUrl, setUploadedFileUrl] = useState("")
   const slippagePercent = 1
 
   // --- Read balances ---
@@ -167,6 +170,38 @@ export default function LandingPage() {
     setTimeout(() => setCopied(false), 2000)
   }
 
+  // --- Upload ID handler ---
+  async function handleIdUpload(event) {
+  if (!event.target.files || !address) return;
+
+  const file = event.target.files[0];
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("walletAddress", address); // send wallet address
+
+  setUploading(true);
+  setUploadError("");
+
+  try {
+    const res = await fetch("/api/upload-id", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      setUploadedFileUrl(data.fileUrl);
+    } else {
+      setUploadError(data.error || "Upload failed");
+    }
+  } catch (err) {
+    console.error(err);
+    setUploadError("Upload failed");
+  } finally {
+    setUploading(false);
+  }
+}
+
   // --- UI ---
   if (paymentSuccess) {
     return (
@@ -298,14 +333,39 @@ export default function LandingPage() {
             <>
               {!isApproved ? (
                 <>
+                  <input
+                    type="file"
+                    accept="image/*,.pdf"
+                    id="id-card"
+                    className="hidden"
+                    onChange={handleIdUpload}
+                    multiple
+                  />
+                  <label
+                    htmlFor="id-card"
+                    className={`cursor-pointer w-full text-center bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg mt-3 ${uploading ? "opacity-50 pointer-events-none" : ""}`}
+                  >
+                    {uploading ? "Uploading..." : "📤 Upload ID Card"}
+                  </label>
+                  {uploadError && (
+                    <p className="text-xs text-red-400 text-center mt-2">{uploadError}</p>
+                  )}
+                  {uploadedFileUrl && (
+                    <p className="text-xs text-green-400 text-center mt-2">
+                      {/* Uploaded: <a href={uploadedFileUrl} target="_blank" rel="noopener noreferrer">{uploadedFileUrl}</a> */}
+                      You uploaded your ID Card. You can now submit your CHF selling request.
+                    </p>
+                  )}
                   <Button
                     onClick={handleSubmit}
-                    className="w-full bg-red-600 hover:bg-red-500"
-                    disabled={!amount}
+                    className="w-full bg-red-600 hover:bg-red-500 mt-2"
+                    disabled={uploading || !uploadedFileUrl?.length || !amount} // check if files uploaded
                   >
                     Submit Sell Request
                   </Button>
-                  <p className="text-xs text-gray-400 text-center mt-1">⏳ Waiting for admin approval...</p>
+                  {/* <p className="text-xs text-gray-400 text-center mt-1">
+                    ⏳ Waiting for admin approval...
+                  </p> */}
                 </>
               ) : (
                 <div className="flex gap-3">
