@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     const data = await req.formData();
 
     const file = data.get("file") as File;
-    const walletAddress = data.get("walletAddress") as string;
+    const walletAddress = (data.get("walletAddress") as string)?.trim();
 
     if (!file || !walletAddress) {
       return NextResponse.json(
@@ -23,7 +23,15 @@ export async function POST(req: NextRequest) {
     const uploadDir = path.join(process.cwd(), "public/uploads");
     if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
 
-    // Always use walletAddress as the filename, preserve extension
+    // Remove any existing files for this wallet (any extension)
+    const existingFiles = fs
+      .readdirSync(uploadDir)
+      .filter((f) => f.startsWith(walletAddress));
+    for (const oldFile of existingFiles) {
+      fs.unlinkSync(path.join(uploadDir, oldFile));
+    }
+
+    // Save new file as walletAddress + original extension
     const ext = path.extname(file.name);
     const filePath = path.join(uploadDir, `${walletAddress}${ext}`);
 

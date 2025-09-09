@@ -11,6 +11,7 @@ export default function AdminDashboard() {
   const [rejectedUsers, setRejectedUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [previewUrl, setPreviewUrl] = useState(null);
 
   // Load contract
   useEffect(() => {
@@ -97,9 +98,24 @@ export default function AdminDashboard() {
         {actions}
         <button
           onClick={() => window.open(`/api/admin/download?wallet=${user}`, "_blank")}
-          className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs"
         >
-          Download ID
+          Download
+        </button>
+        <button
+          onClick={async () => {
+            const res = await fetch(`/api/admin/download?wallet=${user}&preview=true`);
+            const contentType = res.headers.get("Content-Type");
+
+            if (contentType === "application/pdf") {
+              window.open(`/api/admin/download?wallet=${user}&preview=true`, "_blank");
+            } else {
+              setPreviewUrl(`/api/admin/download?wallet=${user}&preview=true`);
+            }
+          }}
+          className="px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-xs"
+        >
+          Preview
         </button>
       </div>
     </li>
@@ -110,7 +126,7 @@ export default function AdminDashboard() {
       <div className="w-full max-w-7xl mx-auto bg-white p-4 sm:p-6 rounded-2xl shadow-md">
         <h1 className="text-2xl font-bold mb-6 text-black text-center sm:text-left">Admin Dashboard</h1>
 
-        {loading && <p className="text-gray-500 mb-2 text-center">Loading...</p>}
+        {/* {loading && <p className="text-gray-500 mb-2 text-center">Loading...</p>} */}
 
         {/* Pending */}
         <h2 className="text-xl font-semibold mb-2 text-black">⏳ Pending Requests</h2>
@@ -124,13 +140,13 @@ export default function AdminDashboard() {
                 <>
                   <button
                     onClick={() => approveUser(user)}
-                    className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
+                    className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-xs"
                   >
                     Approve
                   </button>
                   <button
                     onClick={() => rejectUser(user)}
-                    className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+                    className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 text-xs"
                   >
                     Reject
                   </button>
@@ -186,6 +202,23 @@ export default function AdminDashboard() {
           </p>
         )} */}
       </div>
+      {previewUrl && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+          <div className="bg-white p-4 rounded-lg max-w-[90%] max-h-[90%] relative">
+            <button
+              onClick={() => setPreviewUrl(null)}
+              className="absolute top-2 right-2 text-red-500 font-bold"
+            >
+              ✕
+            </button>
+            <img
+              src={previewUrl}
+              alt="Preview"
+              className="max-h-[80vh] max-w-full mx-auto rounded"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
