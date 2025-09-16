@@ -41,7 +41,7 @@ const HowToBuy = () => {
         {' '}
       </div>
       <div className="px-4">
-        <div className="pt-32 pb-3 md:pb-3">
+        <div className="pt-8 pb-3 md:pb-3">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 uppercase text-white">
             How to Exchange
           </h2>

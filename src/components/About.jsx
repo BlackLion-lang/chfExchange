@@ -39,16 +39,16 @@ const About = () => {
         }
     ]
 
-    const roadmap = [
-        { phase: 'Phase 1', timeline: 'Q1 2025', milestones: ['Concept design', 'Regulatory approval', 'Smart contract development'] },
-        { phase: 'Phase 2', timeline: 'Q2 2025', milestones: ['Launch on Binance'] },
-        { phase: 'Phase 3', timeline: 'Q3 2025', milestones: ['Mobile wallet integration', 'Exchange listings', 'Merchant partnerships'] },
-        { phase: 'Phase 4', timeline: 'Q4 2025', milestones: ['Cross-chain expansion', 'DeFi integration', 'Audit publication'] },
-        { phase: 'Phase 5', timeline: '2026+', milestones: ['CBDC interoperability', 'Global adoption initiatives'] },
-    ]
+    // const roadmap = [
+    //     { phase: 'Phase 1', timeline: 'Q1 2025', milestones: ['Concept design', 'Regulatory approval', 'Smart contract development'] },
+    //     { phase: 'Phase 2', timeline: 'Q2 2025', milestones: ['Launch on Binance'] },
+    //     { phase: 'Phase 3', timeline: 'Q3 2025', milestones: ['Mobile wallet integration', 'Exchange listings', 'Merchant partnerships'] },
+    //     { phase: 'Phase 4', timeline: 'Q4 2025', milestones: ['Cross-chain expansion', 'DeFi integration', 'Audit publication'] },
+    //     { phase: 'Phase 5', timeline: '2026+', milestones: ['CBDC interoperability', 'Global adoption initiatives'] },
+    // ]
 
     return (
-        <div className="w-full py-16 ">
+        <div className="w-full py-24 ">
             <div className="max-w-[1300px] mx-auto px-4">
                 <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 uppercase text-white">
                     CHF Stablecoin Overview
@@ -70,7 +70,7 @@ const About = () => {
                 </div>
 
                 {/* Mobile Swiper */}
-                <div className="md:hidden mb-16">
+                <div className="md:hidden mb-2">
                     <Swiper
                         modules={[Autoplay]}
                         spaceBetween={20}
@@ -94,7 +94,7 @@ const About = () => {
                 </div>
 
                 {/* Roadmap Section */}
-                <div className="mt-16">
+                {/* <div className="mt-16">
                     <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 uppercase text-white">
                         Roadmap
                     </h2>
@@ -112,8 +112,8 @@ const About = () => {
                                 </ul>
                             </div>
                         ))}
-                    </div>
-                </div>
+                    </div> */}
+                {/* </div> */}
             </div>
         </div>
     )
